@@ -1,0 +1,191 @@
+/* Close match to InterSystems Supply Chain UI */
+:root {
+  --header: #dadee2;      /* dark header */
+--leftbar: #eff1f2;            /* your gray */
+  --leftbar-hover: #dadee2;      /* slightly darker/lighter as you prefer */
+  --leftbar-icon: #253242;       /* default icon/text on gray */
+  --leftbar-icon-active: #333695;
+  --content-bg: #f3f5f8;  /* light app bg */
+  --titlebar: #e9edf3;    /* gray title strip */
+  --surface: #ffffff;
+  --border: #d4dae3;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --focus: #00a4b8;       /* teal focus ring */
+  --issue: #f6c20e;       /* yellow issue banner */
+  --header-h: 64px;
+  --header-border: 4px;   
+}
+
+/* You can add global styles to this file, and also import other style files */
+/* ===== Global base (from InterSystems UI) ===== */
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'Noto Sans', "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  overflow-x: hidden;
+}
+
+/* Responsive base font size */
+@media only screen and (min-width: 1500px) {
+  body { font-size: 14px; }
+}
+@media only screen and (min-width: 2000px) {
+  body { font-size: 17px; }
+}
+
+/* Brand link color */
+a { color: #333695; }
+
+/* ===== Noto Sans font faces ===== */
+/* Adjust paths if you keep fonts elsewhere. */
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 100;
+  src: local(''),
+       url('/assets/fonts/noto-sans-v26-latin-100.woff2') format('woff2'),
+       url('/assets/fonts/noto-sans-v26-latin-100.woff') format('woff');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 200;
+  src: local(''),
+       url('/assets/fonts/noto-sans-v26-latin-200.woff2') format('woff2'),
+       url('/assets/fonts/noto-sans-v26-latin-200.woff') format('woff');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: local(''),
+       url('/assets/fonts/noto-sans-v26-latin-300.woff2') format('woff2'),
+       url('/assets/fonts/noto-sans-v26-latin-300.woff') format('woff');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local(''),
+       url('/assets/fonts/noto-sans-v26-latin-regular.woff2') format('woff2'),
+       url('/assets/fonts/noto-sans-v26-latin-regular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: local(''),
+       url('/assets/fonts/noto-sans-v26-latin-500.woff2') format('woff2'),
+       url('/assets/fonts/noto-sans-v26-latin-500.woff') format('woff');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local(''),
+       url('/assets/fonts/noto-sans-v26-latin-600.woff2') format('woff2'),
+       url('/assets/fonts/noto-sans-v26-latin-600.woff') format('woff');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local(''),
+       url('/assets/fonts/noto-sans-v26-latin-700.woff2') format('woff2'),
+       url('/assets/fonts/noto-sans-v26-latin-700.woff') format('woff');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: local(''),
+       url('/assets/fonts/noto-sans-v26-latin-800.woff2') format('woff2'),
+       url('/assets/fonts/noto-sans-v26-latin-800.woff') format('woff');
+}
+@font-face {
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 900;
+  src: local(''),
+       url('/assets/fonts/noto-sans-v26-latin-900.woff2') format('woff2'),
+       url('/assets/fonts/noto-sans-v26-latin-900.woff') format('woff');
+}
+
+/* ===== Angular Material tweaks from the original UI ===== */
+/* Safe to keep even if Material isn’t installed yet — they just won’t match anything. */
+
+app-kpi-list-selector .mat-select-value,
+app-kpi-list-selector .mat-select-arrow { color: #fff; }
+
+app-order-details-issues .mat-expansion-indicator::after,
+app-order-details-line-items .mat-expansion-indicator::after,
+app-shipment-details-tracking .mat-expansion-indicator::after,
+app-shipment-details-line-items .mat-expansion-indicator::after { color: #fff; }
+
+app-order-details-issues .dark-expansion-indicator .mat-expansion-indicator::after { color: #000; }
+
+.comments-dialog-container .mat-dialog-container,
+.process-name-dialog-container .mat-dialog-container { padding-top: 0; }
+
+app-kpi-dimension-panel .mat-expansion-panel-header,
+app-order-details-view .mat-expansion-panel-header,
+app-order-details-issues .mat-expansion-panel-header,
+app-shipment-details-tracking .mat-expansion-panel-header,
+app-shipment-details-line-items .mat-expansion-panel-header,
+app-shipments-filter .mat-expansion-panel-header,
+app-shipments-map .mat-expansion-panel-header { height: 30px; }
+
+app-kpi-dimension-panel .mat-expansion-panel-header.mat-expanded,
+app-order-details-view .mat-expansion-panel-header.mat-expanded,
+app-order-details-issues .mat-expansion-panel-header.mat-expanded,
+app-shipment-details-tracking .mat-expansion-panel-header.mat-expanded,
+app-shipment-details-line-items .mat-expansion-panel-header.mat-expanded,
+app-shipments-filter .mat-expansion-panel-header.mat-expanded,
+app-shipments-map .mat-expansion-panel-header.mat-expanded { height: 30px; }
+
+app-shipments-filter .mat-accordian .mat-expansion-panel,
+app-shipments-map .mat-accordian .mat-expansion-panel { border-radius: 0; }
+
+app-shipments-filter .mat-accordion .mat-expansion-panel:first-of-type,
+app-shipments-map .mat-accordion .mat-expansion-panel:first-of-type,
+app-shipments-filter .mat-accordion .mat-expansion-panel:last-of-type,
+app-shipments-map .mat-accordion .mat-expansion-panel:last-of-type {
+  border-top-left-radius: 0; border-top-right-radius: 0;
+  border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+}
+
+app-shipment-details-tracking .mat-step-text-label {
+  max-width: 10vw;
+  font-size: .8em;
+  word-wrap: break-word;
+}
+
+app-shipments-header .kpi-card { border: 1px solid #333695; }
+
+.map .zoomButton {
+  text-align: left;
+  padding-left: 1vw;
+  font-size: 1.1em;
+  cursor: pointer;
+}
+
+app-kpi-list-selector .mat-select-value { max-width: 100%; width: auto; }
+
+app-shipments-filter .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle,
+app-order-details-issues .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle,
+app-inventory-search-filter .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle { border-color: #919191; }
+
+app-shipments-filter .mat-radio-button.mat-accent .mat-radio-inner-circle,
+app-order-details-issues .mat-radio-button.mat-accent .mat-radio-inner-circle,
+app-inventory-search-filter .mat-radio-button.mat-accent .mat-radio-inner-circle { background-color: #2b2b2b; }
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color: rgba(0, 0, 0, .1) !important;
+}
+
+.issue-card:last-of-type .issue-metric { padding-right: .9vw; }
+
+/* NOTE: removed the duplicate Roboto baseline that was at the bottom of your paste.
+   We keep Noto Sans as the base app font to match InterSystems UI. */

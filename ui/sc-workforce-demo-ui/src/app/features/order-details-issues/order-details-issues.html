@@ -1,0 +1,90 @@
+<div class="order-details-container" [ngClass]="{'dark-expansion-indicator':getForecolorForSeverity()==='#000'}">
+    <mat-accordion>
+        <mat-expansion-panel [expanded]="true" togglePosition="before">
+            <mat-expansion-panel-header [ngStyle]="{'background-color':getBackcolorForSeverity(),'color':getForecolorForSeverity()}">
+                <mat-panel-title>
+                    <mat-icon *ngIf="severityLevel() !== Severity.None" [ngStyle]="{'color':getForecolorForSeverity()}" i18n>error</mat-icon>
+                    <!-- <span class="title-text" *ngIf="severityLevel() !== Severity.None && currentIssue?.status !== 'closed'">&nbsp;</span>
+                    <span class="title-text" *ngIf="currentIssue?.status === 'closed'" >Closed&nbsp;</span> -->
+                    <span class="title-text" *ngIf="issues.length==1" [ngStyle]="{'color':getForecolorForSeverity()}" i18n>Issue</span>
+                    <span class="title-text" *ngIf="issues.length>1" [ngStyle]="{'color':getForecolorForSeverity()}" i18n>Issues</span>
+                    <!-- <span class="title-text" *ngIf="currentIssue?.status === 'closed'" >&nbsp;{{currentIssue?.ID}}</span> -->
+                    <span class="severity-count" *ngIf="highCount > 0" i18n>High Severity</span>
+                    <span class="severity-count" *ngIf="medCount> 0" i18n>Medium Severity</span>
+                    <span class="severity-count" *ngIf="lowCount > 0" i18n>Low Severity</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <!-- <mat-tab-group>
+                <mat-tab *ngFor="let issue of issues; index as i"> -->
+            <div *ngFor="let issue of issues; index as i">
+                    <!-- <ng-template mat-tab-label *ngIf="issue.status == 'closed'" i18n>
+                        <img class = "icon" src="assets/circle-check-solid.svg">
+                        Issue {{i+1}}
+                    </ng-template>
+                    <ng-template mat-tab-label *ngIf="issue.status != 'closed'" i18n>
+                        Issue {{i+1}}
+                    </ng-template> -->
+                    <section class="analysis-section">
+                        <div class="description">{{issue.description}}</div>
+                        <span class="analysis-text" i18n>Analysis <span *ngIf="issue.lastUpdatedTime">|</span> {{getAnalysisDate(issue)}}</span>
+                        <button (click)="updateAnalysis(issue)" mat-button class="update-analysis-button" *ngIf="issue?.status !== 'closed'" i18n><mat-icon>cached</mat-icon> Update Analysis</button>
+                    </section> 
+                    <section class="severity-urgency-section">
+                        <label i18n>Severity:&nbsp;</label><span>{{issue?.severity}}</span><label *ngIf="issue?.urgency" i18n>&nbsp;Urgency:&nbsp;</label><span>{{issue.urgency}}</span>
+                    </section>
+                    <section class="root-cause-section" *ngIf="issue.latestAnalysis?.rootCauseAnalysis">
+                        <label i18n>Root Causes</label>
+                        <p>{{issue.latestAnalysis?.rootCauseAnalysis}}</p>
+                    </section>
+                    <section class="impact-Analysis-section" *ngIf="issue.latestAnalysis?.impactAnalysis">
+                        <label i18n>Impact Analysis</label>
+                        <p>{{issue.latestAnalysis?.impactAnalysis}}</p>
+                    </section>
+                    <section class="recommendations-section" *ngIf="issue.latestAnalysis?.scenarios && issue.latestAnalysis?.scenarios?.length">
+                        <label i18n>Recommendations</label>
+                        <form [formGroup]="recommendationForm">
+                            <mat-radio-group formControlName="selectedOption">
+                                <div class="recommendation-option" *ngFor="let scenario of issue.latestAnalysis!.scenarios">
+                                    <mat-radio-button [value]="scenario.optionNumber">
+                                        <div class="option-label">
+                                            {{scenario.optionName}}
+                                            <span class="recommended" *ngIf="scenario.recommended" i18n>
+                                                <mat-icon>bookmark</mat-icon> RECOMMENDED
+                                            </span>
+                                        </div>
+                                    </mat-radio-button>
+                                    <div class="options-details">
+                                        {{scenario.description}}
+                                    </div>
+                                    <div class="supporting-data">
+                                        {{scenario.supportingData}}
+                                    </div>
+                                </div>
+                                
+                            </mat-radio-group>
+                        </form>
+                        <button mat-flat-button color="primary" (click)="acceptScenario(issue)" *ngIf="issue?.status!=='closed'" i18n>
+                            Accept
+                        </button>
+                         <button mat-raised-button (click)="openDialog(issue.uid)" *ngIf="chatbotEnabled">
+                            <img src="assets/messages-regular.svg"/>
+                        </button>
+                    </section>
+                    <section *ngIf="issue?.status === 'closed'" class="closed-date-section"> 
+                        <label i18n>Closed&nbsp;</label><span>{{getClosedTime(issue)}}</span>
+                    </section>
+                    <section *ngIf="issue?.resolutionNote" class="resolution-section">
+                        <label i18n>Closing comments</label> 
+                        <p>{{issue?.resolutionNote}}</p>
+                    </section>
+                    <section class="no-scenarios-section" *ngIf="(!issue.latestAnalysis?.scenarios || !issue.latestAnalysis?.scenarios?.length) && issue.status !== 'closed'">
+                        <button mat-stroked-button color="primary" (click)="closeIssue(issue)" i18n>
+                            Close Issue
+                        </button>
+                    </section>
+            </div>
+                <!-- </mat-tab>
+            </mat-tab-group> -->
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

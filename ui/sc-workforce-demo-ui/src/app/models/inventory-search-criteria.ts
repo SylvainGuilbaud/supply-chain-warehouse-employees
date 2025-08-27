@@ -1,0 +1,16 @@
+export interface IInventorySearchCriteria {
+    inventoryType?:string,
+    region?:string,
+    siteLocationId?:string,
+    locationFilter?:string,
+    productCategory?:string,
+    productId?:string[],
+    lotNumber?:string,
+    value?:number,
+    minQuantity?:number,
+    maxQuantity?:number,
+    startStorageDate?:Date,
+    endStorageDate?:Date,
+    startExpirationDate?:Date,
+    endExpirationDate?:Date,
+}

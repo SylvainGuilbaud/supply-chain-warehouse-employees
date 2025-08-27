@@ -1,0 +1,38 @@
+<!-- <div *ngFor="let each of trainingData">{{each.id}}</div> -->
+<table mat-table [dataSource]="memories" matSort >
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+    <ng-container matColumnDef="isSystem">
+        <th mat-header-cell *matHeaderCellDef> Type </th>
+        <td mat-cell *matCellDef="let row"> {{ row.isSystem ? 'system' : 'personal' }} </td>
+    </ng-container>
+    <ng-container matColumnDef="content">
+        <th mat-header-cell *matHeaderCellDef> Content </th>
+        <td mat-cell *matCellDef="let row"> {{row.document}} </td>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+        <td mat-cell *matCellDef="let row">
+            <button *ngIf="!row.isSystem" mat-button (click)="remove(row.id)">X</button>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+</table>
+<section class="form-section">
+    <br>
+    <br>
+<div> 
+    <form [formGroup]="form" (ngSubmit)="add()">
+        <mat-form-field >
+            <mat-label>Memory</mat-label>
+            <input matInput formControlName="content">
+        </mat-form-field>
+        <button mat-button class="button-send">
+            <mat-icon matSuffix color="primary">send</mat-icon>
+        </button>
+    </form> 
+</div>
+
+<button mat-button [mat-dialog-close] cdkFocusInitial color="primary" (click)="onClose()">Close</button>

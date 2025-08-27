@@ -1,0 +1,81 @@
+
+
+<section class="settings-page">
+  <!-- Page subheader bar (top-left) -->
+  <header class="topbar">
+  <div class="brand">Settings</div>
+</header>
+
+  <!-- Vertical stack of equal-width cards -->
+  <div class="stack">
+    <!-- Run simulation -->
+    <section class="card run-card">
+      <div class="card-header">
+    <h3>Run simulation</h3>
+    <button
+      class="info-btn"
+      type="button"
+      (click)="toggleInfo()"
+      [attr.aria-expanded]="showInfo()"
+      aria-controls="run-help"
+      [attr.aria-label]="showInfo() ? 'Hide info' : 'Show info'"
+      title="{{ showInfo() ? 'Hide info' : 'Show info' }}"
+    >
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="10" x2="12" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="7" r="1.5" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+    <p class="muted" id="run-help" *ngIf="showInfo()">
+        Running the simulation will generate operational data for both warehouses for the next week of sales. Operational data includes inbound orders, outbound orders as well as the data and time spend on different warehouse tasks for each employee type.
+    </p>
+      <button class="btn primary"
+              [disabled]="simRunning()"
+              (click)="runSimulation()">
+        <span class="spinner" *ngIf="simRunning()"></span>
+        {{ simRunning() ? 'Running…' : 'Run simulation' }}
+      </button>
+
+      <div class="status" *ngIf="simResult() !== 'idle'">
+        <span class="pill ok" *ngIf="simResult() === 'ok'">Simulation ran</span>
+        <span class="pill error" *ngIf="simResult() === 'error'">Failed to run</span>
+      </div>
+    </section>
+
+    <!-- Warehouse panels -->
+    <section class="card warehouse-card" *ngFor="let w of warehouses">
+      <h3>{{ w.name }}</h3>
+
+      <div *ngIf="w.loading" class="skeleton">Loading…</div>
+
+      <div class="emp-list" *ngIf="!w.loading">
+        <div class="emp-row" *ngFor="let t of empTypes">
+          <div class="emp-meta">
+            <div class="emp-label">{{ t.label }}</div>
+            <div class="emp-count">{{ w.staff[t.key] }}</div>
+          </div>
+
+          <!-- Use a template ref or $any() to read the number -->
+          <input
+            #sl
+            type="range"
+            min="0" max="50" step="1"
+            [value]="w.staff[t.key]"
+            (input)="onSlide(w, t.key, sl.valueAsNumber)"
+            (change)="onCommit(w, t.key, sl.valueAsNumber)"
+            />
+
+          <div class="save-state">
+            <span class="saving" *ngIf="w.saveState[t.key] === 'saving'">Saving…</span>
+            <span class="saved pill ok" *ngIf="w.saveState[t.key] === 'saved'">Saved</span>
+            <span class="err pill error" *ngIf="w.saveState[t.key] === 'error'">Error</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+          

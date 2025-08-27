@@ -1,0 +1,254 @@
+/* Settings screen: size/density controls */
+:host {
+  /* one knob: 1.0 = default, 1.15 = ~15% larger, 1.25 = ~25% larger */
+  --scale: 1.5;
+
+  /* derived sizes */
+  --stack-max: calc(960px * var(--scale));                        /* wider cards to reduce whitespace (was ~720px) */
+  --gap: calc(12px * var(--scale));          /* spacing between elements */
+  --card-pad: calc(16px * var(--scale));     /* card inner padding */
+  --h2: clamp(22px* var(--scale), calc(18px + 0.8vw) * var(--scale), 30px* var(--scale));
+  --h3: clamp(18px* var(--scale), calc(16px + 0.4vw)* var(--scale), 24px* var(--scale));
+  --btn-fs: calc(14px * var(--scale));
+  --btn-pad-y: calc(10px * var(--scale));
+  --btn-pad-x: calc(16px * var(--scale));
+  --slider-h: calc(8px * var(--scale));      /* track height */
+  --thumb: calc(20px * var(--scale));        /* thumb diameter */
+  --subheader-gap: clamp(24px* var(--scale), 3vw* var(--scale), 72px* var(--scale)); 
+}
+
+/* Page container */
+.settings-page {
+  /* content padding comes from the app shell; no changes here */
+}
+
+/* header row for the card title + info icon */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  h3 { margin: 0; }
+}
+
+/* circular info button */
+.info-btn {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .05s ease;
+
+  .icon { width: 16px; height: 16px; }
+
+  &:hover {
+    background: color-mix(in srgb, var(--data-color-primary) 15%, #fff);
+    border-color: color-mix(in srgb, var(--data-color-primary) 60%, var(--border));
+    color: #253242;
+  }
+  &:active { transform: translateY(1px); }
+  &:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 45%, transparent);
+  }
+}
+
+/* Subheader bar (top-left) */
+.subheader {
+  background: var(--titlebar, #e9edf3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: calc(12px * var(--scale)) calc(16px * var(--scale));
+  width: max(360px, 40%);                    /* a bit wider by default */
+  max-width: var(--stack-max);
+
+  h2 {
+    margin: 0;
+    font-size: var(--h2);
+    font-weight: 700;
+    color: #253242;
+    line-height: 1.1;
+  }
+}
+
+/* Vertical stack of equal-width cards, centered */
+.stack {
+  max-width: min(100%, var(--stack-max));
+  margin: calc(16px * var(--scale)) auto calc(32px * var(--scale));
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: var(--gap);
+}
+
+/* Cards */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: var(--card-pad);
+  box-shadow: 0 6px 18px rgba(17,24,39,.05);
+  display: grid;
+  gap: var(--gap);
+
+  h3 {
+    margin: 0;
+    font-weight: 600;
+    color: #253242;
+    font-size: var(--h3);
+    line-height: 1.15;
+  }
+
+  .muted {
+    color: var(--muted);
+    margin-top: calc(-2px * var(--scale));
+    font-size: calc(13px * var(--scale));
+  }
+}
+
+/* Buttons */
+.btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: var(--btn-pad-y) var(--btn-pad-x);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: var(--btn-fs);
+  cursor: pointer;
+  transition: transform .05s ease, box-shadow .15s ease, border-color .15s ease;
+
+  &:hover { box-shadow: 0 8px 20px rgba(0,0,0,.06); }
+  &:active { transform: translateY(1px); }
+  &:disabled { opacity: .6; cursor: default; box-shadow: none; }
+}
+.btn.primary {
+  background: var(--data-color-primary);
+  border-color: color-mix(in srgb, var(--data-color-primary) 60%, black);
+  color: #1f2a37;
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: calc(16px * var(--scale));
+  height: calc(16px * var(--scale));
+  margin-right: calc(8px * var(--scale));
+  border: 2px solid rgba(0,0,0,.2);
+  border-top-color: rgba(0,0,0,.6);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Warehouse rows */
+.emp-list { display: grid; gap: var(--gap); }
+
+.emp-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: calc(8px * var(--scale));
+  align-items: center;
+}
+
+.emp-meta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: calc(8px * var(--scale));
+}
+
+.emp-label {
+  font-weight: 500;
+  font-size: calc(14px * var(--scale));
+}
+
+.emp-count {
+  min-width: 2ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: #253242;
+  font-size: calc(14px * var(--scale));
+}
+
+/* Range slider */
+input[type="range"] {
+  width: 100%;
+  appearance: none;
+  height: var(--slider-h);
+  border-radius: 999px;
+  background: #e5e7eb;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid color-mix(in srgb, var(--data-color-primary) 60%, black);
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid color-mix(in srgb, var(--data-color-primary) 60%, black);
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  cursor: pointer;
+}
+
+/* Status pills */
+.pill {
+  display: inline-block;
+  border-radius: 999px;
+  padding: calc(4px * var(--scale)) calc(8px * var(--scale));
+  font-size: calc(12px * var(--scale));
+  font-weight: 600;
+}
+.pill.ok {
+  background: color-mix(in srgb, var(--data-color-primary) 30%, white);
+  border: 1px solid color-mix(in srgb, var(--data-color-primary) 60%, black);
+  color: #1f2a37;
+}
+.pill.error {
+  background: #fee2e2;
+  border: 1px solid #ef4444;
+  color: #991b1b;
+}
+
+/* Skeleton */
+.skeleton { color: var(--muted); font-style: italic; }
+
+
+
+.topbar {
+  margin-bottom: var(--subheader-gap);
+  height: calc(0.5*var(--header-h));
+  box-sizing: border-box;                       /* include border in height */
+  background: var(--header);
+  color: var(--header-text);
+  display: flex;
+  align-items: center;                          /* vertical centering */
+  padding: 0 16px;
+  border-bottom: var(--header-border) solid var(--border);
+  box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 0.8);
+
+  .brand {
+    font-weight: 600;
+    letter-spacing: .2px;
+    color: inherit;
+    line-height: 1;                             /* tight line box */
+    font-size: clamp(8px, calc(var(--header-h) * 0.25), 16px);
+  }
+}
+
+
+

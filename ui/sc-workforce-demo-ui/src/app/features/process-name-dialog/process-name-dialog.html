@@ -1,0 +1,23 @@
+<h2 mat-dialog-title class="process-name-header" i18n>
+    Update Analysis
+    <span mat-dialog-close><mat-icon>close</mat-icon></span>
+</h2>
+<mat-dialog-content>
+    <div class="process-name-container">
+        <form [formGroup]="processForm">
+            <mat-form-field>
+                <input matInput placeholder="Process Name" formControlName="processName">
+            </mat-form-field>
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="bottom-buttons">
+        <button mat-flat-button color="primary" [mat-dialog-close]="processForm.value" class="accept-button" i18n>
+            Run Analysis
+        </button>
+        <button mat-stroked-button mat-dialog-close class="cancel-button" i18n>
+            Cancel
+        </button>
+    </div>
+</mat-dialog-actions>

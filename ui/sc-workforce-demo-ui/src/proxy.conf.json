@@ -1,0 +1,12 @@
+{
+  "/csp": {
+    "target": "http://localhost:22080",
+    "secure": false,
+     "changeOrigin": true
+  },
+  "/api/SC": {
+    "target": "http://localhost:22080",
+    "secure": false,
+     "changeOrigin": true
+  }
+}

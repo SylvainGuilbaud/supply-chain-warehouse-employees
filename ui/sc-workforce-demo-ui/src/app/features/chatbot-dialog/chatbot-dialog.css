@@ -1,0 +1,57 @@
+.chat {
+    list-style-type: none;
+    width: 20em;
+  }
+  
+  .chat__bubble {
+    margin: 3px;
+    padding: 10px;
+    clear: both;
+    border-radius: 10px ;
+  }
+  
+  .chat__bubble.rcvd {
+    background: #f2f2f2;
+    color: black;
+    float: left;
+  }
+  
+  .chat__bubble.sent {
+    background: #3f51b5;
+    color: white;
+    float: right;
+  }
+
+  .button {
+    margin-top: 10px;
+    float:right
+  }
+
+  .chat-section {
+    margin-bottom: 20px;
+    overflow-y: auto;
+    max-height: 400px;
+  }
+
+  .form-section {
+    float:left;
+    height:max-content;
+  }
+
+  .filter-form-field {
+    width: 800px;
+  }
+
+  .message-block {
+    margin:5px;
+  }
+
+  .button-send {
+    background-color: transparent; 
+    border-color: transparent;
+  }
+
+#userResponse
+{
+  white-space:pre-wrap;
+}

@@ -1,0 +1,133 @@
+<section class="forecast-page">
+  <!-- Subheader -->
+  <div class="topbar">
+    <div class="brand">Workload / Workforce Forecast</div>
+  </div>
+
+    <!-- Two-column layout -->
+  <div class="grid">
+    <!-- LEFT: chart + table -->
+    <div class="left-col">
+      <!-- Chart Card -->
+      <section class="card chart-card">
+        <h3>Weekly view</h3>
+        <div class="chart-wrap">
+          <canvas baseChart
+                  [type]="'line'"
+                  [data]="chartData"
+                  [options]="chartOptions">
+          </canvas>
+        </div>
+      </section>
+
+      <!-- Table Card -->
+      <section class="card table-card">
+        <h3>Gap by labor profile</h3>
+
+        <div class="table-scroll">
+          <table class="gap-table">
+            <thead>
+              <tr>
+                <th>Profile</th>
+                <th *ngFor="let w of weekLabels(); let i = index">{{ w }}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let row of tableRows">
+                <th>{{ labelFor(row.productId) }}</th>
+                <td
+  *ngFor="let w of weeks(); index as i"
+  [ngClass]="{
+    'neg': row.gaps[i] < 0,
+    'pos': row.gaps[i] > 0,
+    'clickable-cell': isCellActionable(i, row.productId, row.gaps[i])
+  }"
+  (click)="onCellClick(i, row.productId, row.gaps[i])"
+  [attr.role]="isCellActionable(i, row.productId, row.gaps[i]) ? 'button' : null"
+  [attr.tabindex]="isCellActionable(i, row.productId, row.gaps[i]) ? '0' : null"
+>
+  {{ row.gaps[i] | number:'1.0-0' }}
+</td>
+
+              </tr>
+            </tbody>
+
+            <tfoot>
+              <tr>
+                <th>Total</th>
+                <td *ngFor="let t of tableTotal; let i = index"
+                    [class.positive]="t >= 0"
+                    [class.negative]="t < 0"
+                    (click)="onCellClick(i, 'ALL', t)">
+                  {{ t | number:'1.0-2' }}
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <!-- RIGHT: filters + KPIs -->
+    <div class="right-col">
+      <!-- Filter Card -->
+      <section class="card filter-card">
+        <h3>Filters</h3>
+
+        <div class="field">
+          <label>Warehouse</label>
+          <div class="seg">
+            <button type="button"
+                    class="seg-btn"
+                    [class.active]="form.value.warehouse === 'warehouse-01'"
+                    (click)="onWarehouseChange('warehouse-01')">
+              Warehouse 1
+            </button>
+            <button type="button"
+                    class="seg-btn"
+                    [class.active]="form.value.warehouse === 'warehouse-02'"
+                    (click)="onWarehouseChange('warehouse-02')">
+              Warehouse 2
+            </button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Labor profiles</label>
+          <div class="checks">
+            <label class="check" *ngFor="let p of profiles()">
+              <input type="checkbox"
+                     [checked]="(form.value.profiles || {})[p]"
+                     (change)="onProfileToggle(p, $any($event.target).checked)">
+              <span>{{ labelFor(p) }}</span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- KPI Card -->
+      <section class="card kpi-card">
+        <h3>Issues per profile</h3>
+        <div *ngIf="kpi() as kv; else kpiLoading" class="kpi-grid">
+          <div class="kpi" *ngFor="let v of kv.values">
+            <div class="kpi-label">{{ labelFor(v.label) }}</div>
+            <div class="kpi-value">{{ v.value }}</div>
+          </div>
+        </div>
+        <ng-template #kpiLoading>
+          <div class="skeleton">Loading KPI…</div>
+        </ng-template>
+      </section>
+    </div>
+  </div> <!-- /.grid -->
+
+  <!-- Full-width details below both columns -->
+ <section class="card details-wide" *ngIf="detailsIssues?.length">
+  <app-order-details-issues
+    [order]="detailsOrder"
+    [issues]="detailsIssues"
+    (reloadOrder)="onReloadOrder($event)">
+  </app-order-details-issues>
+</section>
+</section>

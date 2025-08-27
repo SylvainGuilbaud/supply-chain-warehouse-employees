@@ -1,0 +1,8 @@
+.mat-table {
+    width:100%;
+    margin-bottom: 1.25vh;
+}
+
+.mat-cell {
+  padding-right: 16px;
+}

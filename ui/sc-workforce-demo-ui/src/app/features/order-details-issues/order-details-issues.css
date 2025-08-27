@@ -1,0 +1,199 @@
+mat-panel-title {
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #fff;
+}
+
+.mat-expansion-indicator::after {
+    color:#fff;
+}
+
+.analysis-section {
+    padding-top:16px;
+}
+
+.description {
+    font-size: 1.15em;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2b2b2b;
+    padding-bottom: 44px;
+}
+
+.analysis-text {
+    font-size: 1.15em;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2b2b2b;
+    margin-top:-2px;
+}
+
+.update-analysis-button {
+    font-size: 1.15em;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.23;
+    letter-spacing: normal;
+    color: #333695;
+    margin-top:-2px;
+}
+
+.root-cause-section,
+.impact-Analysis-section
+.no-scenarios-section
+{
+    padding-top: 22px;
+}
+
+.root-cause-section label,
+.impact-Analysis-section label,
+.recommendations-section label
+{
+    font-size: 1.15em;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2b2b2b;
+    padding-right: 20px;
+}
+
+.recommendations-section label {
+    margin-bottom: 12px;
+    display:inline-block;
+}
+.root-cause-section p,
+.impact-Analysis-section p {
+    margin-top:0px;
+    margin-bottom:0x;
+    font-size: 1.15em;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2b2b2b;
+}
+
+.option-label {
+    font-size: 1.15em;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2b2b2b;
+    padding-bottom:2px;
+}
+
+.recommended {
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #008f8a;
+    margin-left:5px;
+    text-transform: capitalize;
+}
+
+.recommended mat-icon {
+    position:relative;
+    top:3px;
+}
+
+.options-details {
+    padding-bottom:2px;
+}
+
+.supporting-data {
+    font-style: italic;
+    padding-bottom: 8px;
+}
+
+.options-details,
+.supporting-data {
+    font-size: 1.15em;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2b2b2b;
+    margin-left:29px;
+}
+
+.resolution-section {
+    padding-top:16px;
+}
+
+.resolution-section label {
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2b2b2b;
+    margin-left:0;
+}
+
+.resolution-section p {
+    margin-block-start: .25em;
+    margin-block-end: .25em;
+    margin-left:0;
+}
+
+.closed-date-section,
+.severity-urgency-section {
+    padding-top:16px;
+}
+
+.closed-date-section label,
+.severity-urgency-section label {
+    font-size: 1.15em;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #2b2b2b;
+    margin-left:0;
+}
+
+.closed-date-section span,
+.severity-urgency-section span {
+    font-size: 1.15em;
+    padding-right: .5vw;
+}
+
+.severity-urgency-section label {
+    padding-right:.5vw;
+}
+
+.severity-urgency-section {
+    padding-bottom: 4px;
+}
+
+.severity-count {
+    margin-left: 20px;
+}
+
+.icon {
+    height: 16px;
+    width: 16px;
+    margin-right: 10px;
+}
+
+.title-text {
+    margin-left:7px
+}

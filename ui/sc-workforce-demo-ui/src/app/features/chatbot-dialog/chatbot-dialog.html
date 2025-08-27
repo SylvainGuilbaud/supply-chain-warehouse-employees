@@ -1,0 +1,36 @@
+<section #scrollSection class ="chat-section">
+<div *ngFor="let message of messages" class="message-block">
+    <br>
+    <div id="userResponse" *ngIf="message.role == 'assistant'" class="chat__bubble rcvd">
+        {{message.content}}
+        <br><br>
+        <div  *ngIf="message.additionalInfo" > 
+            <button mat-button *ngIf="!message.show" style="color: blue;" (click)="toggleCollapse(message.id)">show additional information</button>
+            <button mat-button *ngIf="message.show" style="color: blue;" (click)="toggleCollapse(message.id)">hide additional information</button>
+            <div  *ngIf="message.show">{{message.additionalInfo}}</div>
+        </div>
+    </div>
+    <div *ngIf="message.role == 'user' || message.role == 'system'" class="chat__bubble sent" color="primary">{{message.content}}</div>
+    <br>
+</div>
+<div class="chat__bubble rcvd" *ngIf="loading">...</div>
+<br>
+</section>
+
+<section class="form-section">
+    <br>
+    <br>
+<div> 
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <mat-form-field class="filter-form-field">
+            <input matInput formControlName="message" placeholder="Send a message">
+        </mat-form-field>
+        <button mat-button [disabled]="loading" class="button-send">
+            <mat-icon matSuffix color="primary">send</mat-icon>
+        </button>
+    </form> 
+</div>
+<button mat-button [mat-dialog-close] cdkFocusInitial color="primary" (click)="onClose()">Close Chat</button>
+<button mat-button [mat-dialog-close] cdkFocusInitial color="primary" (click)="openTrainingDataDialog()">Manage Memories</button>
+
+</section>

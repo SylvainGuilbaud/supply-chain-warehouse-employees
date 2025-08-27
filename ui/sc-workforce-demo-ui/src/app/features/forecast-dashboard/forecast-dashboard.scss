@@ -1,0 +1,232 @@
+/* Density / scale knobs similar to Settings */
+:host {
+  --scale: 1.0;                  /* bump to 1.15 if you want it bigger */
+  --max-left: 1280px;
+  --right-w: 320px;
+  --gap: 8px;
+  --subheader-gap: clamp(24px* var(--scale), 3vw* var(--scale), 72px* var(--scale)); 
+}
+
+/* Subheader bar */
+.subheader {
+  background: var(--titlebar, #e9edf3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  width: max(360px, 40%);
+  max-width: 640px;
+  margin: 0 auto 16px 0; /* left aligned with a bottom gap */
+
+  h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #253242;
+  }
+}
+
+/* Two-column grid centered as a whole */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--right-w);
+  gap: var(--gap);
+  align-items: start;
+  max-width: calc(var(--max-left) + var(--right-w) + var(--gap));
+  margin: 0 auto; /* center the two-column block */
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}
+
+/* Left column: chart + table stack */
+.left-col {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: var(--gap);
+  max-width: var(--max-left);
+}
+
+/* Right column: filter + KPI stack tight to the left side */
+.right-col {
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: var(--gap);
+}
+
+/* Generic card */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(17,24,39,.05);
+  display: grid;
+  gap: 12px;
+
+  h3 { margin: 0; font-weight: 600; color: #253242; }
+}
+
+/* Bigger chart area */
+.chart-wrap {
+  position: relative;
+  height: 460px; /* ⬆️ increased */
+}
+
+/* Table */
+.table-scroll { overflow: auto; }
+
+.gap-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+
+  thead th, tfoot th, tfoot td {
+    position: sticky;
+    top: 0;
+    background: #f7f9fc;
+    z-index: 1;
+  }
+
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  thead th:first-child,
+  tbody th:first-child,
+  tfoot th:first-child {
+    text-align: left;
+    position: sticky;
+    left: 0;
+    background: #fff;
+    z-index: 2;
+  }
+
+  /* Center the total values */
+  tfoot th, tfoot td {
+    text-align: center;
+  }
+
+  tbody td {
+    cursor: pointer;
+    transition: background .12s ease, color .12s ease;
+  }
+
+  td.positive { color: #065f46; background: #ecfdf5; } /* green-ish */
+  td.negative { color: #991b1b; background: #fee2e2; } /* red-ish */
+}
+
+/* Full-width details below both columns */
+.details-wide {
+  margin: 12px auto 0;
+  max-width: calc(var(--max-left) + var(--right-w) + var(--gap));
+  pre { white-space: pre-wrap; font-size: 12px; }
+}
+
+/* Filter UI */
+.field {
+  display: grid;
+  gap: 8px;
+}
+.field > label {
+  font-weight: 600;
+  color: #253242;
+}
+
+.seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.seg-btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .05s ease;
+}
+.seg-btn.active {
+  background: color-mix(in srgb, var(--data-color-primary) 22%, #fff);
+  border-color: color-mix(in srgb, var(--data-color-primary) 65%, var(--border));
+}
+.seg-btn:active { transform: translateY(1px); }
+
+.checks { display: grid; gap: 6px; }
+.check {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+/* KPI grid */
+.kpi-grid {
+  display: grid;
+  gap: 8px;
+}
+.kpi {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 8px 10px;
+  background: #f7f9fc;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.kpi-label { color: #253242; font-weight: 500; }
+.kpi-value { font-weight: 700; }
+
+/* Loading */
+.skeleton { color: var(--muted); font-style: italic; }
+
+.topbar {
+  margin-bottom: var(--subheader-gap);
+  height: calc(0.5*var(--header-h));
+  box-sizing: border-box;                       /* include border in height */
+  background: var(--header);
+  color: var(--header-text);
+  display: flex;
+  align-items: center;                          /* vertical centering */
+  padding: 0 16px;
+  border-bottom: var(--header-border) solid var(--border);
+  box-shadow: 2px 2px 2px 2px rgb(0 0 0 / 0.8);
+
+  .brand {
+    font-weight: 600;
+    letter-spacing: .2px;
+    color: inherit;
+    line-height: 1;                             /* tight line box */
+    font-size: clamp(8px, calc(var(--header-h) * 0.25), 16px);
+  }
+}
+
+
+/* Inline details should span chart + filter columns */
+.card.details-wide {
+  grid-column: 1 / -1;
+  padding: 0;
+  margin-top: 12px;
+}
+
+td.clickable-cell {
+  background: #fee2e2 !important;   /* soft red */
+  color: #7f1d1d !important;
+
+  text-underline-offset: 2px;
+  cursor: pointer;
+  border-color: #fecaca;
+}
+
+td.clickable-cell:hover {
+  background: #fecaca !important;   /* slightly stronger on hover */
+}
