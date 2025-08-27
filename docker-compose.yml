@@ -1,0 +1,73 @@
+services:
+    iris:
+        build: 
+            context: IRIS/.
+            args:
+                - IMAGE=${IMAGE_IRIS}
+        restart: always
+        container_name: ${CONTAINER_NAME}
+        hostname: ${CONTAINER_NAME}
+        command: 
+            --check-caps false
+            --key /IRIS/key/iris.key
+        init: true
+        environment:
+            - TZ=Europe/Paris
+            - ISC_DATA_DIRECTORY=${ISC_DATA_DIRECTORY}
+        ports:
+            - ${IRIS_SUPERSERVER_PORT}:1972
+        volumes:
+            - ./IRIS:/IRIS
+            - ./${ISC_DATA_DIRECTORY}:${ISC_DATA_DIRECTORY}
+            - ./data:/data
+            - ./code:/code
+            - ./IRIS/jdbc:/jdbc
+    webgateway-apache:
+        image: containers.intersystems.com/intersystems/webgateway:latest-preview
+        init: true
+        container_name: webgateway-apache-1${CONTAINERNAME_SUFFIX}
+        hostname: webgateway-apache-1${CONTAINERNAME_SUFFIX}
+        ports:
+            - ${WEBGATEWAY_APACHE_1_PORT_HTTP}:80
+            - ${WEBGATEWAY_APACHE_1_PORT_HTTPS}:443
+        environment:
+            - ISC_CSP_CONF_FILE=/webgateway/CSP.conf
+            - ISC_CSP_INI_FILE=/webgateway/CSP.ini
+        volumes:
+        - ./webgateway:/webgateway
+        - ./IRIS/cert:/opt/cert
+
+    # ui:
+    #     depends_on:
+    #         iris:
+    #             condition: service_started
+    #     container_name: ui${CONTAINERNAME_SUFFIX}
+    #     hostname: ui
+    #     # image: uct_ui:dev
+    #     restart: always
+    #     build: 
+    #         context: angular/.
+    #         dockerfile: Dockerfile.Development    
+    #     ports:
+    #         - "54200:4200"
+    #     volumes:
+    #         - ./angular/uct:/app
+# # volumes:
+# #     grafdata: ~
+#     scui:
+#         depends_on:
+#             uct-iris:
+#                 condition: service_started
+#         container_name: sc_ui${CONTAINERNAME_SUFFIX}
+#         hostname: scui
+#         image: iris4scui
+#         restart: always
+#         build: 
+#             context: sc-demo-ui/.
+#         ports:
+#             - "4200:4200"
+#         # volumes:
+#         #     - ./sc-demo-ui/scui:/app
+
+
+    

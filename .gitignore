@@ -1,0 +1,25 @@
+generator/code/swag*
+iris/src/UCT/REST/disp/1.int
+iris/src/UCT/REST/impl/1.int
+# ignore all DS_Store files in all directories
+**/.DS_Store
+node_modules
+package-lock.json
+mosquitto.db
+mosquitto.log
+*certbot.pem
+# ignore all .key files
+**/*.key
+volumes
+**/venv
+iris/iris-sco-uct-demo
+# Ignore Python cache files
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/broker
+# ignore .tar and .gz files
+**/*.tar
+**/*.gz
+IRIS/data
+
