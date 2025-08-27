@@ -1,0 +1,13 @@
+[Startup]
+SystemMode=TEST
+
+[config]
+globals=0,0,8192,0,0,0
+routines=0
+jrnbufs=1024
+
+[Actions]
+
+ModifyService:Name=%Service_CallIn,Enabled=1,AutheEnabled=48
+
+Execute:Namespace="IRISAPP",ClassName="%SYSTEM.OBJ",MethodName="Import",Arg1="/irisdev/app/code/objectscript",Arg2="ck"

@@ -1,0 +1,5 @@
+    set namespace="FHIRSERVER"
+    zn namespace
+    do $system.OBJ.ImportDir("/irisdev/app/src/cls","*.cls","cdk",.errors,1)
+    do:($data(errors)) $system.Process.Terminate(1)
+    halt

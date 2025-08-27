@@ -1,0 +1,24 @@
+ROUTINE scmodelAPI.impl.1 [Type=INT,Generated]
+ ;scmodelAPI.impl.1
+ ;Generated for class scmodelAPI.impl.  Do NOT edit. 21/08/2025 12:16:59PM
+ ;;5934396A;scmodelAPI.impl
+ ;
+AddAttribute(objectName,body) methodimpl { if '##class(%SYSTEM.Security).Check("SC_Data_Model_API","W") { do $zu(96,3,206,1,"Method 'AddAttribute' requires resource 'SC_Data_Model_API:W'") }
+    return ##class(SC.Core.API.Data.ObjectApiImpl).AddAttribute(objectName, body)
+}
+CreateCustomObject(body) methodimpl { if '##class(%SYSTEM.Security).Check("SC_Data_Model_API","W") { do $zu(96,3,206,1,"Method 'CreateCustomObject' requires resource 'SC_Data_Model_API:W'") }
+    //(Place business logic here)
+    //Do ..%SetStatusCode(<HTTP_status_code>)
+    //Do ..%SetHeader(<name>,<value>)
+    //Quit (Place response here) ; response may be a string, stream or dynamic object
+    return ##class(SC.Core.API.Data.CustomObjectApiImpl).CreateCustomDataObject(body)
+}
+GetObjectDefinitionByName(objectName) methodimpl { if '##class(%SYSTEM.Security).Check("SC_Data_Model_API","R") { do $zu(96,3,206,1,"Method 'GetObjectDefinitionByName' requires resource 'SC_Data_Model_API:R'") }
+    return ##class(SC.Core.API.Data.ObjectApiImpl).GetObjectDefinitionByName(objectName)
+}
+GetObjects() methodimpl { if '##class(%SYSTEM.Security).Check("SC_Data_Model_API","R") { do $zu(96,3,206,1,"Method 'GetObjects' requires resource 'SC_Data_Model_API:R'") }
+    return ##class(SC.Core.API.Data.ObjectApiImpl).GetObjects()
+}
+UpdateApiJSON() methodimpl { if '##class(%SYSTEM.Security).Check("SC_Data_Model_API","W") { do $zu(96,3,206,1,"Method 'UpdateApiJSON' requires resource 'SC_Data_Model_API:W'") }
+    return ##class(SC.Core.API.Data.CustomObjectApiImpl).RefreshCustomDataObjectApi()
+}

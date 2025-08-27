@@ -1,0 +1,123 @@
+    set r=##class(%Net.HttpRequest).%New(),r.Server="pm.community.intersystems.com",r.SSLConfiguration="ISC.FeatureTracker.SSL.Config" d r.Get("/packages/zpm/latest/installer"),$system.OBJ.LoadStream(r.HttpResponse.Data,"c")
+    set step="Install IPM"
+    zpm "repo -r -n registry -reset-defaults"
+    zpm "install webterminal"
+    zpm "install classexplorer" 
+    zpm "install swagger-ui"
+    zpm "install pex-embbeded-python"
+
+    zn "%SYS"
+    do ##class(%SYSTEM.CSP).SetConfig("CSPConfigName","warehouse-employees")
+
+    do ##class(Security.Users).UnExpireUserPasswords("*")
+    do ##class(%SQL.Statement).%ExecDirect(,"update security.events set enabled=1")
+
+    set username="interop"
+    set roles="%EnsRole_Developer,%DB_IRISAPP_CODE,%DB_IRISAPP_DATA"
+    set password="SYS"
+    set step="Create user " _ username
+    set sc = ##class(Security.Users).Create(username,roles,password,,"IRISAPP",,"",0,1,,,,,,1,1)
+    if 'sc { set ^["USER"]TRACE($zdt($now(),3,,6),step)=$lb($system.Status.GetErrorCodes(sc),$system.Status.GetErrorText(sc))} else { set ^["USER"]TRACE($zdt($now(),3,,6),step)="successful"}
+
+    set username="IRISAPP"
+    set roles="%All"
+    set password="SYS"
+    set ChangePassword = 1
+    set step="Create user " _ username
+    set sc = ##class(Security.Users).Create(username,roles,password,,"IRISAPP",,"",ChangePassword,1,,,,,,1,1)
+    if 'sc { set ^["USER"]TRACE($zdt($now(),3,,6),step)=$lb($system.Status.GetErrorCodes(sc),$system.Status.GetErrorText(sc))} else { set ^["USER"]TRACE($zdt($now(),3,,6),step)="successful"}
+
+    // Encryption Key
+    #; set EncryptionKeyFile="/home/irisowner/keys/encryption-key-IRISAPP.key"
+    #; set sc = ##class(%SYSTEM.Encryption).CreateAutoEncryptionKeyOnly(EncryptionKeyFile,256,"Encryption key for IRISAPP",.EncryptionKeyUser,.EncryptionKeyPassword)
+    #; set step="Create Encryption Key"
+    #; if 'sc { set ^["USER"]TRACE($zdt($now(),3,,6),step)=$lb($system.Status.GetErrorCodes(sc),$system.Status.GetErrorText(sc))} else { set ^["USER"]TRACE($zdt($now(),3,,6),step)="successful"}
+    #; set sc = ##class(%SYSTEM.Encryption).ActivateAutoEncryptionKey(EncryptionKeyFile,EncryptionKeyUser,EncryptionKeyPassword,1,1,1)
+    #; set step="Activate Encryption Key"
+    #; if 'sc { set ^["USER"]TRACE($zdt($now(),3,,6),step)=$lb($system.Status.GetErrorCodes(sc),$system.Status.GetErrorText(sc))} else { set ^["USER"]TRACE($zdt($now(),3,,6),step)="successful"}
+
+    // SSL Config 
+
+    set SSLConfigName = "webgateway"
+    set webgatewaySSLConfig("CertificateFile")= "/opt/cert/certificate.pem"
+    set webgatewaySSLConfig("PrivateKeyFile")="/opt/cert/certificate.key"
+    set webgatewaySSLConfig("Type")=1
+    set sc =  ##class(Security.SSLConfigs).Create(SSLConfigName,.webgatewaySSLConfig)
+    set step="Create SSL config " _ SSLConfigName
+    if 'sc { set ^["USER"]TRACE($zdt($now(),3,,6),step)=$lb($system.Status.GetErrorCodes(sc),$system.Status.GetErrorText(sc))} else { set ^["USER"]TRACE($zdt($now(),3,,6),step)="successful"}
+
+    // SuperServer Config
+    set SuperServerConfig("BindAddress")=""
+    set SuperServerConfig("Description")="System default port"
+    set SuperServerConfig("DoNotStart")=0
+    set SuperServerConfig("EnableCSP")=1
+    set SuperServerConfig("EnableCacheDirect")=0
+    set SuperServerConfig("EnableClients")=1
+    set SuperServerConfig("EnableDataCheck")=1
+    set SuperServerConfig("EnableECP")=1
+    set SuperServerConfig("EnableMirror")=1
+    set SuperServerConfig("EnableNodeJS")=0
+    set SuperServerConfig("EnableSNMP")=0
+    set SuperServerConfig("EnableShadows")=0
+    set SuperServerConfig("EnableSharding")=1
+    set SuperServerConfig("EnableWebLink")=0
+    set SuperServerConfig("Enabled")=1
+    set SuperServerConfig("ImportOperation")=0
+    set SuperServerConfig("Port")=1972
+    set SuperServerConfig("SSLConfig")=SSLConfigName
+    set SuperServerConfig("SSLSupportLevel")=1
+    set SuperServerConfig("SystemDefault")=1
+    set sc = ##class(Security.Servers).Modify(1972,,.SuperServerConfig)
+    set step="Modify SuperServer Config " _ SSLConfigName
+    if 'sc { set ^["USER"]TRACE($zdt($now(),3,,6),step)=$lb($system.Status.GetErrorCodes(sc),$system.Status.GetErrorText(sc))} else { set ^["USER"]TRACE($zdt($now(),3,,6),step)="successful"}
+
+    set oracle = ##class(%Library.SQLConnection).%New()   
+    set oracle.Name = "oracle"
+    set oracle.URL = "jdbc:oracle:thin:@oracle-db:1521:free"
+    set oracle.classpath = "/jdbc/ojdbc11.jar"
+    set oracle.driver = "oracle.jdbc.driver.OracleDriver"
+    set oracle.Usr = "C##supply"
+    set oracle.pwd = "supply_pwd"
+    set oracle.isJDBC = 1
+    set sc = oracle.%Save()
+
+    set mysql = ##class(%Library.SQLConnection).%New()   
+    set mysql.Name = "mysql"
+    set mysql.URL = "jdbc:mysql://mysql:3306/formation"
+    set mysql.classpath = "/jdbc/mysql-connector-java-8.0.26.jar"
+    set mysql.driver = "com.mysql.cj.jdbc.Driver"
+    set mysql.Usr = "formation"
+    set mysql.pwd = "formation"
+    set mysql.isJDBC = 1
+    set sc = mysql.%Save()
+
+    set postgresql = ##class(%Library.SQLConnection).%New()   
+    set postgresql.Name = "postgresql"
+    set postgresql.URL = "jdbc:postgresql://postgres:5432/postgres"
+    set postgresql.classpath = "/jdbc/postgresql-42.6.0.jar"
+    set postgresql.driver = "org.postgresql.Driver"
+    set postgresql.Usr = "postgres"
+    set postgresql.pwd = "postgres"
+    set postgresql.isJDBC = 1
+    set sc = postgresql.%Save()
+
+    set iris = ##class(%Library.SQLConnection).%New()   
+    set iris.Name = "iris"
+    set iris.URL = "jdbc:IRIS://iris-and-others:1972/IRISAPP"
+    set iris.classpath = "/jdbc/intersystems-jdbc-3.10.3.jar"
+    set iris.driver = "com.intersystems.jdbc.IRISDriver"
+    set iris.Usr = "_system"
+    set iris.pwd = "SYS"
+    set iris.isJDBC = 1
+    set sc = iris.%Save()
+
+    set mssql = ##class(%Library.SQLConnection).%New()   
+    set mssql.Name = "mssql"
+    set mssql.URL = "jdbc:sqlserver://mssql:1433;databaseName=master;encrypt=false"
+    set mssql.classpath = "/jdbc/mssql-jdbc-11.2.1.jre8.jar"
+    set mssql.driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    set mssql.Usr = "sa"
+    set mssql.pwd = "sa"
+    set mssql.isJDBC = 1
+    set sc = mssql.%Save()
+    halt

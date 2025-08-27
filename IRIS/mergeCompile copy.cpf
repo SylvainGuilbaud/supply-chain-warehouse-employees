@@ -1,0 +1,2 @@
+[Actions]
+Execute:Namespace="IRISAPP",ClassName="%SYSTEM.OBJ",MethodName="Import",Arg1="/irisdev/app/src/objectscript",Arg2="ck"
