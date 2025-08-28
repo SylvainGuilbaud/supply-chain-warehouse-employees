@@ -40,6 +40,7 @@
     }
 
     zn "%SYS"
+
     set webName = "/csp/simulateapi"
     set webProperties("DispatchClass") = "CGIFTE.REST.SimulationAPI.disp"
     set webProperties("NameSpace") = "WHS1"
@@ -49,7 +50,6 @@
     set webProperties("CorsAllowlist")="*"
     set webProperties("CorsCredentialsAllowed")=1
     set webProperties("CorsHeadersList")="*"
-    set webProperties("DeepSeeEnabled")=1
     set sc = ##class(Security.Applications).Create(webName, .webProperties)
  
     set webName = "/csp/warehouse1"
@@ -61,7 +61,6 @@
     set webProperties("CorsAllowlist")="*"
     set webProperties("CorsCredentialsAllowed")=1
     set webProperties("CorsHeadersList")="*"
-    set webProperties("DeepSeeEnabled")=1
     set sc = ##class(Security.Applications).Create(webName, .webProperties)
     
     set webName = "/csp/warehouse2"
@@ -73,7 +72,6 @@
     set webProperties("CorsAllowlist")="*"
     set webProperties("CorsCredentialsAllowed")=1
     set webProperties("CorsHeadersList")="*"
-    set webProperties("DeepSeeEnabled")=1
     set sc = ##class(Security.Applications).Create(webName, .webProperties)
 
     kill webProperties
@@ -114,6 +112,11 @@
     set webProperties("MatchRoles")=":%All"
     set sc = ##class(Security.Applications).Modify(app,.webProperties)
 
+
+    for app = "/csp/sc","/csp/whs1","/csp/whs2" {
+        set appProperties("DeepSeeEnabled")=1
+        set sc = ##class(Security.Applications).Modify(app,.appProperties)
+    }
 
     set iris = ##class(%Library.SQLConnection).%New()   
     set iris.Name = "WHS1DNS"
