@@ -17,7 +17,7 @@ Method OnProcessInput(pInput As %FileCharacterStream, pOutput As %RegisteredObje
     set pRequest.StringValue = response
     set tSc = ..SendRequestSync("CreateDemandPlan", pRequest, .pResponse, -1)
    }
-   do ##class(SC.Core.Data.Internal.ManualTask).KickOffTask(time)
+#;    do ##class(SC.Core.Data.Internal.ManualTask).KickOffTask(time)
    
    return tSc
 }

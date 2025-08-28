@@ -6,7 +6,7 @@ Confidential property of InterSystems Corporation.
 
 /// API for InterSystems IRIS supply chain cloud services<br/>
 /// Business logic class defined by OpenAPI in sccloudserviceAPI.spec<br/>
-/// Updated Aug 26, 2025 12:56:34
+/// Updated Aug 20, 2025 11:06:11
 Class sccloudserviceAPI.impl Extends %REST.Impl [ ProcedureBlock ]
 {
 

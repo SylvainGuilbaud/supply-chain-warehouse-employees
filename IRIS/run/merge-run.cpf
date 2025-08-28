@@ -1,0 +1,2 @@
+[Actions]
+Execute:Namespace="SC",ClassName="%SYSTEM.OBJ",MethodName="Import",Arg1="/IRIS/sc/src/LaborProduction.cls",Arg2="ck"

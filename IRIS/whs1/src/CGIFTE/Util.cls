@@ -224,7 +224,8 @@ ClassMethod CreateForecastCSV(currentTime) As %Status
         Quit
     }
 
-    Set fileName = "/data/"_$namespace_"/forecast/sales_data_test1_"_$zdatetimeh(currentTime,3,1)_".csv"
+    set sc = ##class(Ens.Config.DefaultSettings).%GetSetting("SCPKG.FoundationProduction", "*", "*", "", "FilePath", .pSetting)
+    Set fileName = pSetting _ "sales_data_test1_"_$zdatetimeh(currentTime,3,1)_".csv"
     set ^Test(fileName) = ""
     Set file = ##class(%Stream.FileCharacter).%New()
     Set file.Filename = fileName

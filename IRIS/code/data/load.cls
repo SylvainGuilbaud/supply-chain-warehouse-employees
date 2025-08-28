@@ -20,33 +20,64 @@ Class data.load
 ClassMethod init(pPath As %String = "/home/irisowner/dev/data/") As %Status
 {
         set ns=$NAMESPACE
-        Set sc = $$$OK
-
-
+        set sc = $$$OK
         set path = pPath
 
+        for warehouse = "WHS1","WHS2" {
+            zn warehouse    
+            for table ="CGIFTE_Persistent.Products", "CGIFTE_Persistent.SalesData"
+            {
+                set sc = ..purge(table)
+            }
 
-        zn "WHS1"
+            set sc = ..LoadFromCSV(path_"Product referential.csv","CGIFTE_Persistent.Products")
+            set sc = ..LoadFromCSV(path_"Sales_receipts/Sales_receipts_STORE_"_warehouse_".csv","CGIFTE_Persistent.SalesData")
+            set sc = ..LoadFromCSV(path_"Sales_receipts/Sales_receipts_WEB_"_warehouse_".csv","CGIFTE_Persistent.SalesData")
 
-        for table ="CGIFTE_Persistent.Products", "CGIFTE_Persistent.SalesData"
-        {
-            set sc = ..purge(table)
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP1','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP5','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP4','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP2','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP10','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP12','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP17','Receive,Load'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP7','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP11','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP20','Receive,Load'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP14','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP19','Receive,Load'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP21','Control'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP18','Receive,Load'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP16','Receive,Load'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP22','Control'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP24','Control'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP25','Control'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP23','Control'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP3','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP13','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP8','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP6','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP15','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP9','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP26','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP27','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP28','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP29','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP30','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP31','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP32','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP33','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP34','Storage,Pick,Prepare'))
+            &SQL(INSERT INTO CGIFTE_Persistent.Employee (Available, BusyUntil, EmployeeId, TaskType) VALUES (0,NULL,'EMP35','Storage,Pick,Prepare'))    
+
         }
 
-        set sc = ..LoadFromCSV(path_"Product referential.csv","CGIFTE_Persistent.Products")
-        set sc = ..LoadFromCSV(path_"Sales_receipts/Sales_receipts_STORE_WHS1.csv","CGIFTE_Persistent.SalesData")
-        set sc = ..LoadFromCSV(path_"Sales_receipts/Sales_receipts_WEB_WHS1.csv","CGIFTE_Persistent.SalesData")
-
-        zn "WHS2"
-
-         for table = "CGIFTE_Persistent.Products", "CGIFTE_Persistent.SalesData"
-        {
-            set sc = ..purge(table)
-        }
-
-        set sc = ..LoadFromCSV(path_"Product referential.csv","CGIFTE_Persistent.Products")
-        set sc = ..LoadFromCSV(path_"Sales_receipts/Sales_receipts_STORE_WHS2.csv","CGIFTE_Persistent.SalesData")
-        set sc = ..LoadFromCSV(path_"Sales_receipts/Sales_receipts_WEB_WHS2.csv","CGIFTE_Persistent.SalesData")
+        zn "SC"
+        &sql(INSERT INTO SC_Data.Product (defaultUom, description, lastUpdatedTime, name, recordCreatedTime, type, uid) VALUES ('hours','Labor related to receiving and loading tasks in the warehouse','2025-04-03 15:59:08.493','Forklift operator','2025-04-03 15:59:08.493','LABOR','laborproduct-01'))
+        &sql(INSERT INTO SC_Data.Product (defaultUom, description, lastUpdatedTime, name, recordCreatedTime, type, uid) VALUES ('hours','Labor related to quality control task in the warehouse','2025-04-03 15:59:18.912','Quality control','2025-04-03 15:59:18.912','LABOR','laborproduct-02'))
+        &sql(INSERT INTO SC_Data.Product (defaultUom, description, lastUpdatedTime, name, recordCreatedTime, type, uid) VALUES ('hours','Labor related to picking, packing and storage task in the warehouse','2025-04-03 15:59:27.986','General warehouse operations','2025-04-03 15:59:27.986','LABOR','laborproduct-03'))
+        &sql(INSERT INTO SC_Data.Location (city, coordinates, country, lastUpdatedTime, name, recordCreatedTime, type, uid) VALUES ('Paris','48.85341, 2.3488','France','2025-04-03 16:05:21.207','Pompéa warehouse','2025-04-03 16:05:21.207','WAREHOUSE','warehouse-01'))
+        &sql(INSERT INTO SC_Data.Location (city, coordinates, country, lastUpdatedTime, name, recordCreatedTime, type, uid) VALUES ('Lille','50.6330, 3.0586','France','2025-04-30 14:33:09.815','Pompéa warehouse Lille','2025-04-30 14:33:09.815','WAREHOUSE','warehouse-02'))
 
         zn ns
         Return sc

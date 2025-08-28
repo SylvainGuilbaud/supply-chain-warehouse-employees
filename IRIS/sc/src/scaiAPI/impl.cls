@@ -6,7 +6,7 @@ Confidential property of InterSystems Corporation.
 
 /// API for InterSystems Supply Chain AI Assistant<br/>
 /// Business logic class defined by OpenAPI in scaiAPI.spec<br/>
-/// Updated Aug 26, 2025 12:56:34
+/// Updated Aug 20, 2025 11:07:30
 Class scaiAPI.impl Extends %REST.Impl [ ProcedureBlock ]
 {
 
