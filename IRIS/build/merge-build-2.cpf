@@ -3,7 +3,7 @@
 Execute:Namespace="USER",ClassName="%SYSTEM.OBJ",MethodName="Import",Arg1="/home/irisowner/dev/code",Arg2="ck"
 
 Execute:Namespace="SC",ClassName="%SYSTEM.OBJ",MethodName="Import",Arg1="/home/irisowner/dev/sc/src",Arg2="ck"
-#Execute:Namespace="SC",ClassName="%SYSTEM.OBJ",MethodName="Import",Arg1="/home/irisowner/dev/sc/src/LaborProduction.cls",Arg2="ck"
+Execute:Namespace="SC",ClassName="%SYSTEM.OBJ",MethodName="Import",Arg1="/home/irisowner/dev/sc/src/LaborProduction.cls",Arg2="ck"
 Execute:Namespace="SC",ClassName="Ens.Director",MethodName="SetAutoStart",Arg1="SC.Core.BP.LaborProduction"
 
 Execute:Namespace="WHS1",ClassName="%SYSTEM.OBJ",MethodName="Import",Arg1="/home/irisowner/dev/whs1/src",Arg2="ck"

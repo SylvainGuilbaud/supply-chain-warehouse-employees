@@ -2,7 +2,7 @@
 SystemMode=LIVE
 
 [config]
-globals=0,0,8192,0,0,0
+globals=0,0,32768,0,0,0
 routines=0
 jrnbufs=1024
 

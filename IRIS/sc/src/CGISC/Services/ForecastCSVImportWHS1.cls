@@ -136,9 +136,13 @@ ClassMethod CalculateAllWorkloads(filename As %String, startWeek As %TimeStamp, 
     import random
     import json
     from datetime import timedelta
+    import iris
 
     # --- Load once ---
     df = pd.read_csv(filename)
+    glob=iris.gref('rows')
+    rows = len(df)
+    glob[1] = rows
 
     # Normalize/validate columns
     if 'Week' not in df.columns or 'TotalSales' not in df.columns:

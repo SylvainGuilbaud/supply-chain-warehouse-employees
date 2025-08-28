@@ -13,12 +13,10 @@ XData ProductionDefinition
   <Item Name="Workflow Operation" Category="" ClassName="EnsLib.Background.Workflow.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
   <Item Name="ForecastCSVImportWHS1" Category="" ClassName="CGISC.Services.ForecastCSVImportWHS1" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
-    <Setting Target="Adapter" Name="FileSpec">sales_data*.csv</Setting>
     <Setting Target="Adapter" Name="DeleteFromServer">0</Setting>
     <Setting Target="Adapter" Name="FileAccessTimeout">5</Setting>
   </Item>
   <Item Name="ForecastCSVImportWHS2" Category="" ClassName="CGISC.Services.ForecastCSVImportWHS2" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
-    <Setting Target="Adapter" Name="FileSpec">sales_data*.csv</Setting>
     <Setting Target="Adapter" Name="DeleteFromServer">0</Setting>
     <Setting Target="Adapter" Name="FileAccessTimeout">5</Setting>
   </Item>

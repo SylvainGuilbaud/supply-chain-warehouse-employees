@@ -34,10 +34,11 @@
     set ^Ens.Config.DefaultSettingsD("*","ForecastCSVImportWHS1","*","WorkPath")=$lb("/data/WHS1/work/","",0)
     set ^Ens.Config.DefaultSettingsD("*","ForecastCSVImportWHS2","*","WorkPath")=$lb("/data/WHS2/work/","",0)
 
-    for warehouse = "WHS1","WHS2" {
-        zn warehouse
-        set ^Ens.Config.DefaultSettingsD("SCPKG.FoundationProduction","*","*","FilePath")=$lb("/data/"_warehouse_"/forecast/","",0)
-    }
+    zn "WHS1"
+    set ^Ens.Config.DefaultSettingsD("SCPKG.FoundationProduction","*","*","FilePath")=$lb("/data/"_$NAMESPACE_"/forecast/","",0)
+
+    zn "WHS2"
+    set ^Ens.Config.DefaultSettingsD("SCPKG.FoundationProduction","*","*","FilePath")=$lb("/data/"_$NAMESPACE_"/forecast/","",0)
 
     zn "%SYS"
 
