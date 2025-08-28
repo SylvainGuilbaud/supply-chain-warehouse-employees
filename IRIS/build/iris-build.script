@@ -138,7 +138,9 @@
     set iris.isJDBC = 1
     set sc = iris.%Save()
 
-  
+    zn "sc"
+    set sc = ##class(CGISC.Util).FullReset()
+    set sc =  ##class(SC.Core.Util.LaborKPIUtil).loadLaborKPIs()
 
 
     halt
