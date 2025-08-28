@@ -117,8 +117,11 @@ Method ProcessEndOfDay(endOfDay As %TimeStamp) As %Status
     // Check if it's Friday (6) or a regular weekday
     If day = 6 {
         Set nextWorkday = ##class(%SYSTEM.SQL.Functions).DATEADD("h",16+(2*24),currentTime) // Friday evening -> next Monday
-        do ##class(CGIFTE.Util).CreateForecastCSV(currentTime)
+        do ##class(CGIFTE.Util).CreateForecastCSV(currentTime,.fileName)
         $$$TRACE("CSVSend")
+        do ##class(CGIFTE.Util).CreateOKFile(fileName)
+        $$$TRACE("OK fileName: "_fileName)
+
     } Else {
         Set nextWorkday = ##class(%SYSTEM.SQL.Functions).DATEADD("h",16,currentTime)  // Weekday -> next day
     }

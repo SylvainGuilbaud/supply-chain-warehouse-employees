@@ -211,7 +211,7 @@ ClassMethod Reset() As %Status
     return $$$OK
 }
 
-ClassMethod CreateForecastCSV(currentTime) As %Status
+ClassMethod CreateForecastCSV(currentTime, ByRef fileName) As %Status
 {
         Set sql = "SELECT sd.StoreId As StoreId, p.SupplierId As SupplierId, COUNT(*) AS TotalSales " 
         _ "FROM CGIFTE_Persistent.SalesData sd JOIN CGIFTE_Persistent.Products p ON sd.ProductId = p.ProductId " 
@@ -253,6 +253,19 @@ ClassMethod CreateForecastCSV(currentTime) As %Status
 
     Do file.%Save()
     Do file.%Close()
+
+    return $$$OK
+}
+
+ClassMethod CreateOKFile(fileName) As %Status
+{
+    // Create a semaphore file to indicate the CSV file is finished
+    Set okFileName = $replace(fileName, ".csv", ".ok")
+    Set okFile = ##class(%Stream.FileCharacter).%New()
+    Set okFile.Filename = okFileName
+    Do okFile.WriteLine("OK:"_$zdt($h,3))
+    Do okFile.%Save()
+    Do okFile.%Close()
 
     return $$$OK
 }

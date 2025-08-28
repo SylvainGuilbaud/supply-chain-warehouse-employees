@@ -1,8 +1,8 @@
 {
     "git.ignoreLimitWarning": true,
     "objectscript.conn": {
-        "active": false,
+        "active": true,
         "server": "supply-chain-warehouse-employees",
-        "ns": "SC"
+        "ns": "WHS2"
     }
 }
