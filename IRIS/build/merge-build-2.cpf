@@ -13,3 +13,7 @@ Execute:Namespace="WHS2",ClassName="%SYSTEM.OBJ",MethodName="Import",Arg1="/home
 Execute:Namespace="WHS2",ClassName="Ens.Director",MethodName="SetAutoStart",Arg1="SCPKG.FoundationProduction"
 
 Execute:Namespace="USER",ClassName="data.load",MethodName="init",Arg1="/home/irisowner/dev/data/"
+
+Execute:Namespace="SC",ClassName="CGISC.Util",MethodName="FullReset"
+Execute:Namespace="SC",ClassName="SC.Core.Util.LaborKPIUtil",MethodName="loadLaborKPIs"
+
