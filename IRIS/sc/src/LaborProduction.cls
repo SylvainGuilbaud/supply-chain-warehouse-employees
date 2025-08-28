@@ -15,10 +15,12 @@ XData ProductionDefinition
   <Item Name="ForecastCSVImportWHS1" Category="" ClassName="CGISC.Services.ForecastCSVImportWHS1" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="DeleteFromServer">0</Setting>
     <Setting Target="Adapter" Name="FileAccessTimeout">5</Setting>
+    <Setting Target="Adapter" Name="SemaphoreSpec">*.csv=*.ok</Setting>
   </Item>
   <Item Name="ForecastCSVImportWHS2" Category="" ClassName="CGISC.Services.ForecastCSVImportWHS2" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="DeleteFromServer">0</Setting>
     <Setting Target="Adapter" Name="FileAccessTimeout">5</Setting>
+    <Setting Target="Adapter" Name="SemaphoreSpec">*.csv=*.ok</Setting>
   </Item>
   <Item Name="CreateDemandPlan" Category="" ClassName="CGISC.Processes.CreateDemandPlan" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>

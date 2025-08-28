@@ -3,6 +3,6 @@
     "objectscript.conn": {
         "active": true,
         "server": "supply-chain-warehouse-employees",
-        "ns": "WHS2"
+        "ns": "SC"
     }
 }
