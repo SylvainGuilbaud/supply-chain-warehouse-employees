@@ -40,7 +40,8 @@ RUN --mount=type=bind,src=.,dst=. \
     # . ~/py_envs/bin/activate && \
     # pip3 install -r requirements.txt && \
     iris start IRIS && \
-    iris merge IRIS ./build/merge-build.cpf && \
+    iris merge IRIS ./build/merge-build-1.cpf && \
     iris session IRIS < ./build/iris-build.script && \
+    iris merge IRIS ./build/merge-build-2.cpf && \
     iris stop IRIS quietly && \
     python3 -m pip install --target /usr/irissys/mgr/python pandas
