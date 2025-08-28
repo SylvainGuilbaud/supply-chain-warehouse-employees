@@ -1,0 +1,1806 @@
+{
+	"info": {
+		"_postman_id": "5c5b8a82-6faf-4105-8f2b-81293098be58",
+		"name": "Labor Demo: Supply Chain AI Assistant APIs Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21446788"
+	},
+	"item": [
+		{
+			"name": "AI Assistant",
+			"item": [
+				{
+					"name": "Run SC AI Assistant",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "SYS",
+								"username": "superuser"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "user",
+								"value": "amy",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"question\": \"Why Option A was recommended? and what's the customer name?\",\r\n    \"sessionId\": \"1\",\r\n    \"additionalContext\": \"This is ISSUE-1008\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/chat"
+					},
+					"response": []
+				},
+				{
+					"name": "Vectorize Healthcare Knowledge",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"0": {
+									"key": "password",
+									"value": "SYS",
+									"type": "string"
+								},
+								"1": {
+									"key": "username",
+									"value": "superuser",
+									"type": "string"
+								},
+								"password": "SYS",
+								"username": "superuser"
+							}
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "user",
+								"value": "amy",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/vectorize-healthcare-knowledge"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat History",
+			"item": [
+				{
+					"name": "Create Chat Session",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "SYS",
+								"username": "superuser"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/sessions"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Chat Session",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "SYS",
+								"username": "superuser"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/sessions/:id",
+							"host": [
+								"{{IRIS-SERVER}}"
+							],
+							"path": [
+								"{{NAMESPACE-PATH}}",
+								"{{SCAI-PATH}}",
+								"sessions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Chat Messages",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "SYS",
+								"username": "superuser"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/sessions/:sessionId/messages",
+							"host": [
+								"{{IRIS-SERVER}}"
+							],
+							"path": [
+								"{{NAMESPACE-PATH}}",
+								"{{SCAI-PATH}}",
+								"sessions",
+								":sessionId",
+								"messages"
+							],
+							"variable": [
+								{
+									"key": "sessionId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add chat messages",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "SYS",
+								"username": "superuser"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"content\": \"Why option C was recommended?\",\n        \"type\": \"USER\",\n        \"metadata\": \"\"\n    },\n    {\n        \"content\": \"Option C was recommended because it had the lowest cost impact.\",\n        \"type\": \"ASSISTANT\",\n        \"metadata\": \"\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/sessions/:sessionId/messages",
+							"host": [
+								"{{IRIS-SERVER}}"
+							],
+							"path": [
+								"{{NAMESPACE-PATH}}",
+								"{{SCAI-PATH}}",
+								"sessions",
+								":sessionId",
+								"messages"
+							],
+							"variable": [
+								{
+									"key": "sessionId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Memories",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Create memory",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"document\":\"superduper is a product category\",\r\n\"metadata\": {\"key\": \"value\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/usermemories"
+							},
+							"response": []
+						},
+						{
+							"name": "Get memory by id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/usermemories/:id",
+									"host": [
+										"{{IRIS-SERVER}}"
+									],
+									"path": [
+										"{{NAMESPACE-PATH}}",
+										"{{SCAI-PATH}}",
+										"usermemories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3ff36592-e96a-56a3-a290-a133cef4165f"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all memories",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/usermemories"
+							},
+							"response": []
+						},
+						{
+							"name": "Update memory",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"superduper is a product type\",\n    \"metadata\": {\"key1\": \"value1\"}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/usermemories/:id",
+									"host": [
+										"{{IRIS-SERVER}}"
+									],
+									"path": [
+										"{{NAMESPACE-PATH}}",
+										"{{SCAI-PATH}}",
+										"usermemories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3ff36592-e96a-56a3-a290-a133cef4165f"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete memory",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/usermemories/:id",
+									"host": [
+										"{{IRIS-SERVER}}"
+									],
+									"path": [
+										"{{NAMESPACE-PATH}}",
+										"{{SCAI-PATH}}",
+										"usermemories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "3ff36592-e96a-56a3-a290-a133cef4165f"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "Get all memories (admin)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Get memory by ID (admin)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories/:id",
+									"host": [
+										"{{IRIS-SERVER}}"
+									],
+									"path": [
+										"{{NAMESPACE-PATH}}",
+										"{{SCAI-PATH}}",
+										"memories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "530ba2b7-e7a0-5db6-9d4e-04dbfd564901"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create memory (admin)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"test doc\", \n    \"username\":\"chloe\", \n    \"isSystem\": false, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Update memory (admin)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\"document\":\"superduper is a product type\",\n\"username\":\"\",\n\"metadata\": {\"key\": \"value\"},\n\"isSystem\":true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories/:id",
+									"host": [
+										"{{IRIS-SERVER}}"
+									],
+									"path": [
+										"{{NAMESPACE-PATH}}",
+										"{{SCAI-PATH}}",
+										"memories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1201433b-1aae-5318-8a1f-4a761713b429"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete memory (admin)",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories/:id",
+									"host": [
+										"{{IRIS-SERVER}}"
+									],
+									"path": [
+										"{{NAMESPACE-PATH}}",
+										"{{SCAI-PATH}}",
+										"memories",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1201433b-1aae-5318-8a1f-4a761713b429"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "GenAI Credentials",
+			"item": [
+				{
+					"name": "Create OpenAI Credentials",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "SYS",
+								"username": "superuser"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"openai\",\r\n    \"apiKey\": \"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\",\r\n    \"LLMDeployment\": \"gpt-4.1\",\r\n    \"embeddingModelDeployment\": \"text-embedding-3-large\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/credentials"
+					},
+					"response": []
+				},
+				{
+					"name": "Update OpenAI Credentials",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": {
+								"password": "SYS",
+								"username": "superuser"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"openai\",\r\n    \"apiKey\": \"<your-api-key>\",\r\n    \"LLMDeployment\": \"gpt-4.1\",\r\n    \"embeddingModelDeployment\": \"text-embedding-3-large\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/credentials/:id",
+							"host": [
+								"{{IRIS-SERVER}}"
+							],
+							"path": [
+								"{{NAMESPACE-PATH}}",
+								"{{SCAI-PATH}}",
+								"credentials",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Knowledge Vectorization",
+			"item": [
+				{
+					"name": "Standard Supply Chain",
+					"item": [
+						{
+							"name": "Knowledge 1",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"For customer orders and outbound shipments (from our warehouse to customers), use the SalesOrder and SalesShipment tables.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 2",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"For supplier orders and inbound shipments (from suppliers to our warehouses), use the PurchaseOrder and SupplyShipment tables.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 3",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"When calculating the number of orders for a product, count distinct orders, not order lines.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 4",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"For revenue-related questions, sum the value column from the SalesOrderLine table, and join the SalesOrder table for related information (e.g. orderPlacedDate, orderStatus, etc.).\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 5",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"One Order contains many Order Lines. Each Order Line is associated with a Shipment Line. One Shipment contains many Shipment Lines.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 6",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Getting Sales Shipment details for a Sales Order: Query the SalesShipmentLine table. Select: salesOrderId salesShipmentId. Reason for GROUP BY: A single sales order can have multiple order lines, which can lead to duplicate salesShipmentId entries for the same salesOrderId. Group by salesOrderId to ensure one record per order.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 7",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Getting Supply Shipment details for a Purchase Order: Query the SupplyShipmentLine table. Select: purchaseOrderId supplyShipmentId. Reason for GROUP BY: A single purchase order can have multiple order lines, leading to duplicate supplyShipmentId entries for the same purchaseOrderId. Group by purchaseOrderId to ensure one record per order.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 8",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Getting the Carrier of an Order: Use the relevant Shipment Line table (SalesShipmentLine for sales orders or SupplyShipmentLine for purchase orders) to locate the shipment(s) linked to the order. Join with the Shipment table to retrieve the carrierId\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 9",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Avoid using recordCreatedTime or lastUpdatedTime for time filters — they are for internal tracking and should only be used if the user explicitly asks for creation or update timestamps.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 10",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"For questions about arrived shipments (e.g., 'How many supply shipments arrived this month?'), use actualTimeOfArrival, not actualShipDate or recordCreatedTime.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 11",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"A shipment is considered shipped on time if actualShipDate is less than or equal to committedShipDate in the PurchaseOrder or SalesOrder.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 12",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"A shipment is considered arrived on time if actualTimeOfArrival is less than or equal to committedDeliveryDate in the PurchaseOrder or SalesOrder.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 13",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"A shipment is in transit if actualShipDate is not NULL and actualTimeOfArrival is NULL.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 14",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"An alternate part is the item with isAlternate=1 in the BOM table, indicating we can substitute this part for another item. For example, if itemId='item-001', isAlternate=1, and substituteFor='item-002', then we can substitute 'item-001' for 'item-002'\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 15",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"To find products related to an order, join the order table with the order line table and use product info from the order line.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 16",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"For questions about upcoming shipments (e.g., 'When will the next sales shipment to Best Buy arrive?'), use estimatedTimeOfArrival and filter for rows where actualTimeOfArrival IS NULL.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 17",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"The relationship about a final product requires what items/parts to build is stored in SC_Data.BOM table, and a final product will typically require multiple items. The final product id is stored in the 'productId' column, and the items/parts with different quantities it needs are stored in the 'itemId' column.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Healthcare Supply Chain",
+					"item": [
+						{
+							"name": "SC_Data.Product",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"SC_Data.Product table is used to store the medical procedure and the items/parts required for the procedure. Only 5 columns will be used: uid, name, type, productCategory, and type. There're only two types of products: type='Product' for procedure, and type='Part' for an item/part (like medical device, healthcare product or pharmaceutical). ProductCategory stores the category of an item/part like 'consumeable' for example. Procedure is also known as the surgery, and you can find the items it needs from SC_Data.BOM table. The procedure schedule date is captured in the SC_Data.SalesOrder.committedDeliveryDate column (which is the date the procedure planned to take place); The date of scheduling is captured in the SC_Data.SalesOrder.orderPlacedDate column; The uid of the medical facility location where the procedure takes place is captured in the SC_Data.SalesOrder.shipToLocationId column.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "SC_Data.BOM",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"SC_Data.BOM table is used to store the relationship about a medical procedure/surgery requires what medical products, and a procedure will typically require multiple items. The procedure id is stored in the 'productId' column as the final product, and the medical products with different quantities it needs are stored in the 'itemId' column. Only use 'productId', 'itemId', and 'quantity' columns, don't use any other columns for SQL query.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "SC_Data.SalesOrder",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"SC_Data.SalesOrder table is used to store the Doctor order and Internal order information. Doctor order (with orderType='Doctor') will get created when a patient (SC_Data.Customer, type='Patient') goes to the hospital (SC_Data.Location) to do a surgery/procedure (SC_Data.Product, type='Product'). If the question mentions procedure, please join this table with SC_Data.SalesOrderLine on salesOrderId and SC_Data.Product table on productId to get the procedure information, make sure to use 'WHERE SC_Data.SalesOrder.uid='doctor order id'' to focus on a specific procedure. The procedure scheduled or planned date is stored in the 'committedDeliveryDate' column. Internal order (with orderType='Internal') will get created when the hospital facility (SC_Data.Customer) place an order for some medical products (SC_Data.Product, type='Part'). An internal order works like the regular supply chain order, and will be used together with SC_Data.SalesOrderLine, and it can have multiple sales order lines (SC_Data.SalesOrderLine).\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "SC_Data.SalesOrderLine",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"SC_Data.SalesOrderLine table is used to bridge the SC_Data.SalesOrder and SC_Data.Product tables to find the doctor order is assciated with which procedure. Only use 'productId' and 'salesOrderId' columns, don't use any other columns for SQL query.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "SC_Data.Customer",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"SC_Data.Customer table is used to store the patient information (with type='Patient'). The paitent of the doctor order is also known as the customer of the sales order. If the user asks about the location information about this patient, use the 'primaryLocationId' first.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "SC_Data.Location",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"SC_Data.Location table captures four different kinds of location details. 1. type='Customer': The location of the patient. 2. type='Supplier': The locaiton of the medical product supplier. 3. type='Hospital': The location of the hospital, healthcare institution, or medical facility. 4. type='Warehouse': The location of where the medical products are stored.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "SC_Data.ProductSupplier",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"SC_Data.ProductSupplier table stores information about which products are supplied by which suppliers.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "SC_Core_Data_Internal.PredictedInventory",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Table Name: SC_Core_Data_Internal.PredictedInventory Table Description: This table captures a location such as hospital will have how many available medical items/parts/products in stock in X days based on prediction. SQL query on this table must always include 'WHERE dayInFuture=X' to clarify the stock of an item on what specific day. For example, if the procedure scheduled date is '2025-06-15', then dayInFuture would be Date('2025-06-15') - Date(GETDATE()) = 2. If the procedure or date information is not explicitly given, always use 'WHERE dayInFuture=0' for SQL. Column Details: ['productId (varchar): unique id of the product stored at this inventory.','locationId (varchar): unique id of the inventory location.','availabilityQuantity (numeric): the predicted available amount of the product at this inventory in dayInFuture days','dayInFuture (numeric): Number of days in the future, which implies there'll be availabilityQuantity of this product in X days','uid (varchar) [PK]: unique ID of this inventory record'] Foreign Key Details: ['Constraint FOREIGN KEY (productId) REFERENCES SC_Data.Product(uid)','Constraint FOREIGN KEY (locationId) REFERENCES SC_Data.Location(uid)']\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 1",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Healthcare data model overiew: A patient (SC_Data.Customer) goes to the medical facitlity (SC_Data.Location) to see the doctor. The doctor will create an order (SC_Data.SalesOrder) to do the surgery/procedure (SC_Data.Product, type='Product') for a patient. The procedure requires multiple items (SC_Data.Product, type='Part') such as medical devices or products, and the relationship is recorded in SC_Data.BOM. There's product inventory (SC_Core_Data_Internal.PredictedInventory) to check the current and future stock (SC_Core_Data_Internal.PredictedInventory) for each item at a specific hospital (SC_Data.Location). The medical facility (SC_Data.Location) will purchase items (SC_Data.Product, type='Part') from the supplier (SC_Data.Supplier), and you can use 'shipToLocationId' in the purchase order (SC_Data.PurchaseOrder) to determine that purchase order will go to which medical facility. One purchase order includes multiple purchase order lines (SC_Data.PurchaseOrderLine), which records what item (SC_Data.Product, type='Part') are purchased. You can always refer to the supply shipment (SC_Data.SupplyShipment) and supply shipment line (SC_Data.SupplyShipmentLine) to see when will these purchase items get delivered.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 2",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"If the user asks about the stock or inventory for an item, you must only use 3 tables to generate the SQL: SC_Core_Data_Internal.PredictedInventory, SC_Data.Product, and SC_Data.Location\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 3",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"The procedure scheduled date is captured in the SC_Data.SalesOrder.committedDeliveryDate column (which is the date the procedure planned to take place); The date of scheduling is captured in the SC_Data.SalesOrder.orderPlacedDate column; The uid of the medical facility location where the procedure takes place is captured in the SC_Data.SalesOrder.shipToLocationId column.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 4",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Given a procedure and an item required for that procedure, deficit or a procedure having inventory issue means 'SC_Core_Data_Internal.PredictedInventory.availabilityQuantity < SC_Data.BOM.quantity WHERE dayInFuture=Date(SC_Data.SalesOrder.committedDeliveryDate) - Date(GETDATE())' at a particular location.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 5",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Mutiple procedures will be impacted by the shortage of an item. First, check which procedures require this item with SC_Data.BOM. Second, join with SC_Data.SalesOrderLine and SC_Data.SalesOrder to find out these impacted procedures' scheduled dates. Third, join with SC_Core_Data_Internal.PredictedInventory to see if that required item will have deficit issue at the procedure scheduled date.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 6",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Next shipment means the shipment whose committedTimeOfArrival time is larger but closest to the current time.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 7",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"If the user has already provided the item/part/product information, you don't need to find the related items of the procedure using SC_Data.SalesOrder and SC_Data.SalesOrderLine.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 8",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Always use SC_Data.ProductSupplier if the user asks which suppliers can provide what products.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 9",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"Don't mix up the procedure and item/part, and always return their names for the procedure-related questions.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 10",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\":\"If the user is asking about a specific procedure, make sure to set the SQL WHERE condition on SC_Data.SalesOrder.uid\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Workforce Supply Chain",
+					"item": [
+						{
+							"name": "Knowledge 1",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"Labor is represented as a product object in the SCO data model, so labor supply and demand can be modeled like physical components.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 2",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"Warehouse locations are stored in the SC_Data.Location table.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 3",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"Warehouse locations are stored in the SC_Data.Location table.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 4",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"Product-to-labor requirements are defined in the SC_Data.BOM table, treating labor profiles as parts of the actual product.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 5",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"Daily product demand is stored in the SC_Data.DemandPlan table.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 6",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"Daily labor supply is stored in the SC_Data.SupplyPlan table.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 7",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"Labor demand is generated by expanding product demand through the ratios in the SC_Data.BOM.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 8",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"Labor demand is generated by expanding product demand through the ratios in the SC_Data.BOM.\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 9",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"The internal table SC_Core_Data_Internal.LaborDeficit stores calculated labor deficit quantities over the next 14 days\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 10",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"The internal table SC_Core_Data_Internal.LaborDeficit stores calculated labor deficit quantities over the next 14 days\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						},
+						{
+							"name": "Knowledge 11",
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": {
+										"password": "SYS",
+										"username": "superuser"
+									}
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"document\": \"The internal table SC_Core_Data_Internal.LaborDeficit stores calculated labor deficit quantities over the next 14 days\", \n    \"username\":\"\", \n    \"isSystem\": true, \n    \"metadata\":{}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{IRIS-SERVER}}/{{NAMESPACE-PATH}}/{{SCAI-PATH}}/memories"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
