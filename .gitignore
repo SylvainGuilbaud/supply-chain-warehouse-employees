@@ -4,6 +4,8 @@
 **/*.key
 volumes
 **/venv
+**/archive
+**/*.ok
 iris/iris-sco-uct-demo
 # Ignore Python cache files
 **/*.pyc
