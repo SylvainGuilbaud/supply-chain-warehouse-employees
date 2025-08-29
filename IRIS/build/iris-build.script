@@ -12,7 +12,11 @@
     zpm "install objectscript-json-trace-viewer"
     zpm "enable -map -globally"
 
-    zpm "repo -n registry -r -url https://pm.intersystems.com/ -token OOgdlnM6VzUFa7BfUTYEjUbXoufj32Tt"
+
+    set f = ##class(%File).%New("/IRIS/key/zpm-token.key")
+    do f.Open("R")
+    set token = f.ReadLine()
+    zpm "repo -n registry -r -url https://pm.intersystems.com/ -token "_token
 
     zn "SC"
     zpm "install isc-supply-chain"
