@@ -20,3 +20,5 @@ The **Supply Chain Demonstrator** is a tool designed to optimize employee workfl
 - Tracking employee performance and identifying areas for improvement.  
 
 This tool is ideal for organizations aiming to modernize their supply chain operations and achieve higher levels of efficiency in warehouse management.  
+
+[Orchestrer sa supply chain à partir de données fiables : de la vision à l’action](https://www.supplychain-event.com/fr-fr/conferences/liste/details.4540.246663.orchestrer-sa-supply-chain-%C3%A0-partir-de-donn%C3%A9es-fiables--de-la-vision-%C3%A0-l%E2%80%99action.html)
