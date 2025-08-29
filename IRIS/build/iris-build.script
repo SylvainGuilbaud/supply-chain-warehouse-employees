@@ -3,6 +3,7 @@
     set r=##class(%Net.HttpRequest).%New(),r.Server="pm.community.intersystems.com",r.SSLConfiguration="ISC.FeatureTracker.SSL.Config" d r.Get("/packages/zpm/latest/installer"),$system.OBJ.LoadStream(r.HttpResponse.Data,"c")
     
     zpm "repo -r -n registry -reset-defaults"
+    zpm "repo -n registry -r -url https://pm.community.intersystems.com/"
     zpm "enable -community"
     zpm "install webterminal"
     zpm "install classexplorer"
@@ -12,18 +13,15 @@
     zpm "install objectscript-json-trace-viewer"
     zpm "enable -map -globally"
 
-
-    set f = ##class(%File).%New("/IRIS/key/zpm-token.key")
+    zn "SC"
+    
+    set f = ##class(%File).%New("/home/irisowner/dev/key/zpm-token.key")
     do f.Open("R")
     set token = f.ReadLine()
-    zpm "repo -n registry -r -url https://pm.intersystems.com/ -token "_token
-
-    zn "SC"
+    zpm "repo -n registry -r -url https://pm.intersystems.com/ -token "_token 
     zpm "install isc-supply-chain"
 
-    zpm "repo -n registry -r -url https://pm.community.intersystems.com/"
-
-    #; zpm "repo -delete-all"
+    zpm "repo -delete-all"
     zpm "repo -r -n registry -url http://sc-repo.iscinternal.com:52773/registry"
     zpm "install isc-supply-chain-ai-copilot"
 
