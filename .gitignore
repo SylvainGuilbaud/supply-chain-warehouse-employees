@@ -16,4 +16,5 @@ iris/iris-sco-uct-demo
 **/*.tar
 **/*.gz
 IRIS/data
-
+# remove .angular artifacts in all directories
+/ui/sco-workforce-demo-ui/.angular
