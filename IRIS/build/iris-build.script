@@ -128,7 +128,7 @@
     set iris = ##class(%Library.SQLConnection).%New()   
     set iris.Name = "WHS1DNS"
     set iris.URL = "jdbc:IRIS://warehouse-employees:1972/WHS1"
-    set iris.classpath = "/jdbc/intersystems-jdbc-3.10.3.jar"
+    set iris.classpath = "/jdbc/intersystems-jdbc-3.10.4.jar"
     set iris.driver = "com.intersystems.jdbc.IRISDriver"
     set iris.Usr = "_system"
     set iris.pwd = "SYS"
@@ -138,7 +138,7 @@
     set iris = ##class(%Library.SQLConnection).%New()   
     set iris.Name = "WHS2DNS"
     set iris.URL = "jdbc:IRIS://warehouse-employees:1972/WHS2"
-    set iris.classpath = "/jdbc/intersystems-jdbc-3.10.3.jar"
+    set iris.classpath = "/jdbc/intersystems-jdbc-3.10.4.jar"
     set iris.driver = "com.intersystems.jdbc.IRISDriver"
     set iris.Usr = "_system"
     set iris.pwd = "SYS"
