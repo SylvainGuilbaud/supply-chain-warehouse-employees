@@ -90,8 +90,6 @@ WHERE
   </Item>
   <Item Name="JG" Category="" ClassName="EnsLib.JavaGateway.Service" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
-  <Item Name="CGISC.Services.ForecastCSVImportWH" Category="" ClassName="CGISC.Services.ForecastCSVImportWH" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
-  </Item>
 </Production>
 }
 
