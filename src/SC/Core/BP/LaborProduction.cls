@@ -12,15 +12,16 @@ XData ProductionDefinition
   </Item>
   <Item Name="Workflow Operation" Category="" ClassName="EnsLib.Background.Workflow.Operation" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
-  <Item Name="ForecastCSVImportWHS1" Category="" ClassName="CGISC.Services.ForecastCSVImportWHS1" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+  <Item Name="ForecastCSVImportWHS1" Category="" ClassName="CGISC.Services.ForecastCSVImportWH" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="DeleteFromServer">0</Setting>
     <Setting Target="Adapter" Name="FileAccessTimeout">5</Setting>
     <Setting Target="Adapter" Name="SemaphoreSpec">*.csv=*.ok</Setting>
   </Item>
-  <Item Name="ForecastCSVImportWHS2" Category="" ClassName="CGISC.Services.ForecastCSVImportWHS2" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
+  <Item Name="ForecastCSVImportWHS2" Category="" ClassName="CGISC.Services.ForecastCSVImportWH" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="true" Schedule="">
     <Setting Target="Adapter" Name="DeleteFromServer">0</Setting>
     <Setting Target="Adapter" Name="FileAccessTimeout">5</Setting>
     <Setting Target="Adapter" Name="SemaphoreSpec">*.csv=*.ok</Setting>
+    <Setting Target="Host" Name="warehouse">warehouse-02</Setting>
   </Item>
   <Item Name="CreateDemandPlan" Category="" ClassName="CGISC.Processes.CreateDemandPlan" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
@@ -89,6 +90,8 @@ WHERE
   <Item Name="Bulk Upload Process Job" Category="" ClassName="SC.Core.BP.Process.ProcessJob" PoolSize="2" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
   <Item Name="JG" Category="" ClassName="EnsLib.JavaGateway.Service" PoolSize="1" Enabled="true" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
+  </Item>
+  <Item Name="CGISC.Services.ForecastCSVImportWH" Category="" ClassName="CGISC.Services.ForecastCSVImportWH" PoolSize="1" Enabled="false" Foreground="false" Comment="" LogTraceEvents="false" Schedule="">
   </Item>
 </Production>
 }
