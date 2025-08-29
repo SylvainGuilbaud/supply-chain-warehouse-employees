@@ -19,8 +19,6 @@ services:
         volumes:
             - ./IRIS:/IRIS
             - ./${ISC_DATA_DIRECTORY}:${ISC_DATA_DIRECTORY}
-            - ./data:/data
-            - ./code:/code
             - ./IRIS/jdbc:/jdbc
     webgateway-apache:
         image: containers.intersystems.com/intersystems/webgateway:latest-preview
