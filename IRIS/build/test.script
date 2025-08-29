@@ -1,0 +1,23 @@
+   zn "sc"
+   set ^Ens.Config.DefaultSettingsD("*","ForecastCSVImportWHS1","*","FilePath")=$lb("/home/irisowner/data/WHS1/forecast","",0)
+    set ^Ens.Config.DefaultSettingsD("*","ForecastCSVImportWHS2","*","FilePath")=$lb("/home/irisowner/data/WHS2/forecast","",0)
+    set ^Ens.Config.DefaultSettingsD("*","ForecastCSVImportWHS1","*","ArchivePath")=$lb("/home/irisowner/data/WHS1/archive/","",0)
+    set ^Ens.Config.DefaultSettingsD("*","ForecastCSVImportWHS2","*","ArchivePath")=$lb("/home/irisowner/data/WHS2/archive/","",0)
+    set ^Ens.Config.DefaultSettingsD("*","ForecastCSVImportWHS1","*","WorkPath")=$lb("/home/irisowner/data/WHS1/work/","",0)
+    set ^Ens.Config.DefaultSettingsD("*","ForecastCSVImportWHS2","*","WorkPath")=$lb("/home/irisowner/data/WHS2/work/","",0)
+     w ##class(Ens.Director).StopProduction(0,1)
+    w ##class(Ens.Director).StartProduction()
+
+    zn "WHS1"
+    set ^Ens.Config.DefaultSettingsD("SCPKG.FoundationProduction","*","*","FilePath")=$lb("/home/irisowner/data/"_$NAMESPACE_"/forecast/","",0)
+    w ##class(Ens.Director).StopProduction(0,1)
+    w ##class(Ens.Director).StartProduction()
+
+    zn "WHS2"
+    set ^Ens.Config.DefaultSettingsD("SCPKG.FoundationProduction","*","*","FilePath")=$lb("/home/irisowner/data/"_$NAMESPACE_"/forecast/","",0)
+    w ##class(Ens.Director).StopProduction(0,1)
+    w ##class(Ens.Director).StartProduction()
+
+    zn "sc"
+
+    

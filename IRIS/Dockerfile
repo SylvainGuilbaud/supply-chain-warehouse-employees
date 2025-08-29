@@ -13,7 +13,13 @@ RUN apt-get update && apt-get install -y \
     chmod -R +rx /opt/cert
 
 ENV EXTERNAL_DATA_DIRECTORY=/volumes/IRIS
-RUN mkdir -p $EXTERNAL_DATA_DIRECTORY && chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_MGRUSER} $EXTERNAL_DATA_DIRECTORY
+RUN mkdir -p $EXTERNAL_DATA_DIRECTORY && chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_MGRUSER} $EXTERNAL_DATA_DIRECTORY && \
+    mkdir -p /data/WHS1/forecast && chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_MGRUSER} /data/WHS1/forecast && \
+    mkdir -p /data/WHS2/forecast && chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_MGRUSER} /data/WHS2/forecast && \
+    mkdir -p /data/WHS1/archive && chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_MGRUSER} /data/WHS1/archive && \
+    mkdir -p /data/WHS2/archive && chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_MGRUSER} /data/WHS2/archive && \
+    mkdir -p /data/WHS1/work && chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_MGRUSER} /data/WHS1/work && \
+    mkdir -p /data/WHS2/work && chown -R ${ISC_PACKAGE_MGRUSER}:${ISC_PACKAGE_MGRUSER} /data/WHS2/work
 
 ENV ISC_PACKAGE_MGRUSER=irisowner
 USER ${ISC_PACKAGE_MGRUSER}
